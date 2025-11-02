@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анархия веков - Свобода мысли и действий</title>
+    <meta name="description" content="Анархия веков - пространство свободной мысли и независимого творчества">
+    <meta name="author" content="Carrie">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, hsl(260, 30%, 8%), hsl(260, 25%, 10%));
+            color: hsl(0, 0%, 95%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(29, 20, 37, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid hsl(260, 15%, 25%);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(142, 70%, 45%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-desktop {
+            display: none;
+            gap: 2rem;
+        }
+
+        .nav-desktop button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-desktop button:hover {
+            color: hsl(270, 75%, 65%);
+        }
+
+        .menu-button {
+            display: block;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid hsl(260, 15%, 25%);
+        }
+
+        .nav-mobile.active {
+            display: flex;
+        }
+
+        .nav-mobile button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: left;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-mobile button:hover {
+            color: hsl(270, 75%, 65%);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .hero-logo {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 2rem;
+            animation: pulse-slow 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.2)) drop-shadow(0 0 60px rgba(16, 185, 129, 0.2));
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(142, 70%, 45%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4rem;
+        }
+
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 4rem;
+        }
+
+        .scroll-indicator:hover {
+            color: hsl(270, 75%, 65%);
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 8rem 1.5rem;
+        }
+
+        .about-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(135deg, hsl(270, 75%, 65%), hsl(142, 70%, 45%));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3rem;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        .highlight-primary {
+            color: hsl(270, 75%, 65%);
+            font-weight: 600;
+        }
+
+        .highlight-secondary {
+            color: hsl(142, 70%, 45%);
+            font-weight: 600;
+        }
+
+        .about-content p:last-child {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            padding-top: 1rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: hsl(260, 20%, 12%);
+            border: 1px solid hsl(260, 15%, 25%);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 320px;
+        }
+
+        .service-card:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+            transform: scale(1.05);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+
+        .service-icon.primary {
+            background: rgba(139, 92, 246, 0.2);
+            color: hsl(270, 75%, 65%);
+        }
+
+        .service-icon.secondary {
+            background: rgba(16, 185, 129, 0.2);
+            color: hsl(142, 70%, 45%);
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .service-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-button {
+            width: 100%;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .service-button.primary {
+            background: hsl(270, 75%, 65%);
+            color: white;
+        }
+
+        .service-button.primary:hover {
+            background: hsl(270, 75%, 60%);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .service-button.secondary {
+            background: hsl(142, 70%, 45%);
+            color: white;
+        }
+
+        .service-button.secondary:hover {
+            background: hsl(142, 70%, 40%);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 1.5rem;
+            border-top: 1px solid hsl(260, 15%, 25%);
+            margin-top: 5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .nav-desktop {
+                display: flex;
+            }
+
+            .menu-button {
+                display: none;
+            }
+
+            .hero-logo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 2rem;
+            }
+
+            .about-title {
+                font-size: 4rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-logo">
+                <img src="logo.jpg" alt="Анархия веков">
+                <h1 class="header-title">Анархия веков</h1>
+            </div>
+
+            <nav class="nav-desktop">
+                <button onclick="scrollToSection('about')">Обо мне</button>
+                <button onclick="scrollToSection('services')">Услуги</button>
+            </nav>
+
+            <button class="menu-button" onclick="toggleMenu()">
+                <svg class="menu-icon" id="menuIcon" viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="nav-mobile" id="mobileMenu">
+            <button onclick="scrollToSection('about'); toggleMenu()">Обо мне</button>
+            <button onclick="scrollToSection('services'); toggleMenu()">Услуги</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="logo.jpg" alt="Анархия веков" class="hero-logo">
+        <h1 class="hero-title">Анархия веков</h1>
+        <p class="hero-subtitle">Свобода мысли и действий</p>
+        
+        <div class="scroll-indicator" onclick="scrollToSection('about')">
+            <span>Листайте вниз</span>
+            <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2 class="about-title">Обо мне</h2>
+        <div class="about-content">
+            <p>
+                Добро пожаловать в <span class="highlight-primary">Анархию веков</span> — пространство, где свобода информации встречается с искусством разведки открытых источников.
+            </p>
+            <p>
+                Специализируюсь на <span class="highlight-secondary">OSINT</span> (Open Source Intelligence) — сборе, анализе и обработке информации из открытых источников. В эпоху цифровой революции умение находить, проверять и систематизировать данные становится критически важным навыком.
+            </p>
+            <p>
+                Моя работа охватывает широкий спектр направлений: от цифровой криминалистики и анализа социальных сетей до геолокации и верификации информации. Использую передовые инструменты и методологии для поиска цифровых следов, восстановления удаленных данных и построения связей между различными источниками информации.
+            </p>
+            <p>
+                Здесь вы найдете экспертизу в области кибербезопасности, обучающие материалы по OSINT-техникам, аналитические отчеты и практические кейсы. Делюсь знаниями о том, как защитить свою цифровую идентичность и научиться эффективно работать с информацией в современном мире.
+            </p>
+            <p>
+                Присоединяйтесь к сообществу исследователей, где каждый стремится к истине через призму открытых данных.
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="services-grid">
+            <!-- Service Card 1 -->
+            <div class="service-card">
+                <div class="service-icon primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
+                    </svg>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Список услуг</h3>
+                    <p class="service-description">
+                        Информация о предоставляемых услугах. Узнайте все детали о наших возможностях и предложениях.
+                    </p>
+                    <button class="service-button primary" onclick="alert('Список услуг')">
+                        Узнать подробнее
+                    </button>
+                </div>
+            </div>
+
+            <!-- Service Card 2 -->
+            <div class="service-card">
+                <div class="service-icon secondary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+                    </svg>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">Канал в телеграмм</h3>
+                    <p class="service-description">
+                        Основной канал с публикациями, отчетами и прочим контентом. Самые свежие материалы и эксклюзивный контент.
+                    </p>
+                    <button class="service-button secondary" onclick="alert('Переход в Telegram')">
+                        Перейти
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>created by Carrie</p>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const headerHeight = 80;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - headerHeight;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                icon.innerHTML = '<path d="M4 6h16M4 12h16M4 18h16"></path>';
+            } else {
+                menu.classList.add('active');
+                icon.innerHTML = '<path d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const menuButton = document.querySelector('.menu-button');
+            
+            if (menu.classList.contains('active') && 
+                !menu.contains(event.target) && 
+                !menuButton.contains(event.target)) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+</html>
